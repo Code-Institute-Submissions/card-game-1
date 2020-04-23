@@ -1,16 +1,44 @@
-let cardGameContainer = document.getElementById("cardContainer");
-let card = document.createElement("img");
-card.src= "assets/images/crd3.png";
-card.classList.add("cardImage");
-cardGameContainer.appendChild(card);
+ let cardGameContainer = document.getElementById("cardContainer");
+ let cardSizeOne = 134;
+ let cardSizeTwo = 100;
+ let cardMargin = 30;
+ function getRandomArbitrary(min, max) {
+  return Math.round(Math.random() * (max - min) + min);
+}
+ 
+ function arrangeCrds(vertical,horizontal){
+     for(let i = 0; i < vertical; i++){
+         for(let j = 0; j < horizontal; j++){
+             makeCard( getRandomArbitrary(1,8),i,j);
+         }
+     }
+
+ } 
+ arrangeCrds(4,4);
+ 
+ function makeCard(crdname,axx,axy) {
+  let card = document.createElement("img");
+  card.src = "assets/images/crd"+crdname + ".png";
+  card.style.position = "absolute";
+  card.style.left= (axy*(cardSizeOne + cardMargin) + cardMargin )+ "px";
+  card.style.top= (axx * (cardSizeOne + cardMargin) + cardMargin )  + "px";
+  //card.classList.add("cardImage");
+  cardGameContainer.appendChild(card);
+}
+ /*
+ makeCard(1,0,0);
+ makeCard(5,0,1);
+ makeCard(7,0,2);
+ makeCard(9,0,3);
+  makeCard(8,1,0);
+ makeCard(4,1,1);
+ makeCard(3,1,2);
+ makeCard(6,1,3);**/
+
+ //makeCard(1,0,3.8);
 
 
-
-
-
-
-
-/*function startTimer(){
+ /*function startTimer(){
     let btn = document.getElementById("start-btn");
     btn.addEventListener("click",setInterval(timeSet, 1000));
 }
@@ -36,5 +64,3 @@ function timeSet() {
         e.preventDefault();
         console.log(myinput.value);
     }); **/
-
-

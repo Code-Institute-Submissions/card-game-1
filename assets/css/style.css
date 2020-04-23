@@ -10,8 +10,9 @@
     position: relative;
     border: solid 3px rgb(255, 255, 255);
     border-radius: 10px;
-    height: 600px;
-    width: 700px;
+    height: 700px;
+    width: 660px;
+    
 }
 .cardImage{
     position: absolute;
