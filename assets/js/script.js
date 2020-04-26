@@ -5,35 +5,35 @@ let gamerow = 4;
 let gamecol = 4;
 let firstcard = null;
 let secondcard = null;
- /*function getRandomArbitrary(min, max) {
+let chkTimeout = null;
+/*function getRandomArbitrary(min, max) {
   return Math.round(Math.random() * (max - min) + min);
  } // makeCard(getRandomArbitrary(1, 8), i, j);**/
 
 function arrangeCrds(vertical, horizontal) {
-    let myarr = [];
-    for(let a = 1; a < (gamerow * gamecol/2) + 1; a++){
-        myarr.push(a);
-        myarr.push(a);
-    }
-    let cardShuffle=[];
-    while(myarr.length > 0){
-        let cardRandom = Math.floor(Math.random()* myarr.length);
-        cardShuffle.push(myarr[cardRandom]);
-        myarr.splice(cardRandom,1);
+  let myarr = [];
+  for (let a = 1; a < (gamerow * gamecol) / 2 + 1; a++) {
+    myarr.push(a);
+    myarr.push(a);
+  }
+  let cardShuffle = [];
+  while (myarr.length > 0) {
+    let cardRandom = Math.floor(Math.random() * myarr.length);
+    cardShuffle.push(myarr[cardRandom]);
+    myarr.splice(cardRandom, 1);
+  }
 
-    }
-
-  for (let i = 0; i < vertical; i++) {
+   for (let i = 0; i < vertical; i++) {
     for (let j = 0; j < horizontal; j++) {
-      makeCard(cardShuffle.pop(),i, j);
+      makeCard(cardShuffle.pop(), i, j);
     }
   }
 }
-arrangeCrds(gamerow,gamecol);
+ arrangeCrds(gamerow, gamecol);
 
 function makeCard(crdname, axx, axy) {
   let card = document.createElement("img");
-  card.nAme= crdname;
+  card.nAme = crdname;
   card.src = "assets/images/crdbck.png"; //" + crdname + "
   card.style.position = "absolute";
   card.style.left = axy * (cardSizeOne + cardMargin) + cardMargin + "px";
@@ -42,28 +42,37 @@ function makeCard(crdname, axx, axy) {
   card.onclick = clickedCard;
   cardGameContainer.appendChild(card);
 }
- function clickedCard(event){
-     let card = event.target;
-     card.src = "assets/images/crd"+card.nAme+".png";
+function clickedCard(event) {
+ if(chkTimeout != null){
+     clearTimeout(chkTimeout);
+     
+     verifycard();
+  }
+  let card = event.target;
+  
 
-     if(firstcard == null){
-         firstcard = card;
-     }else if (secondcard == null){
-        secondcard = card;
-     
-     if(firstcard.nAme == secondcard.nAme){
-         cardGameContainer.removeChild(firstcard);
-         cardGameContainer.removeChild(secondcard);
-     } else{
-         firstcard.src= "assets/images/crdbck.png";
-         secondcard.src= "assets/images/crdbck.png";
-     }
-        firstcard = null;
-        secondcard = null;
-    }
-    
-     
- }
+  if (firstcard == null) {
+    card.src = "assets/images/crd" + card.nAme + ".png";
+    firstcard = card;
+  } else if (secondcard == null) {
+    card.src = "assets/images/crd" + card.nAme + ".png";
+    secondcard = card;
+    chkTimeout = setTimeout(verifycard, 1000);
+  }
+}
+function verifycard() {
+  if (firstcard.nAme == secondcard.nAme) {
+    cardGameContainer.removeChild(firstcard);
+    cardGameContainer.removeChild(secondcard);
+  } else {
+    firstcard.src = "assets/images/crdbck.png";
+    secondcard.src = "assets/images/crdbck.png";
+  }
+  firstcard = null;
+  secondcard = null;
+  chkTimeout = null;
+}
+
 /*
  makeCard(1,0,0);
  makeCard(5,0,1);
