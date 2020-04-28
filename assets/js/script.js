@@ -6,6 +6,7 @@ let gamecol = 4;
 let firstcard = null;
 let secondcard = null;
 let chkTimeout = null;
+let matchedcards = 0;
 /*function getRandomArbitrary(min, max) {
   return Math.round(Math.random() * (max - min) + min);
  } // makeCard(getRandomArbitrary(1, 8), i, j);**/
@@ -23,18 +24,19 @@ function arrangeCrds(vertical, horizontal) {
     myarr.splice(cardRandom, 1);
   }
 
-   for (let i = 0; i < vertical; i++) {
+  for (let i = 0; i < vertical; i++) {
     for (let j = 0; j < horizontal; j++) {
       makeCard(cardShuffle.pop(), i, j);
     }
   }
 }
- arrangeCrds(gamerow, gamecol);
+arrangeCrds(gamerow, gamecol);
 
 function makeCard(crdname, axx, axy) {
   let card = document.createElement("img");
   card.nAme = crdname;
   card.src = "assets/images/crdbck.png"; //" + crdname + "
+  card.classList.add("cardImage");
   card.style.position = "absolute";
   card.style.left = axy * (cardSizeOne + cardMargin) + cardMargin + "px";
   card.style.top = axx * (cardSizeOne + cardMargin) + cardMargin + "px";
@@ -43,17 +45,20 @@ function makeCard(crdname, axx, axy) {
   cardGameContainer.appendChild(card);
 }
 function clickedCard(event) {
- if(chkTimeout != null){
-     clearTimeout(chkTimeout);
-     
-     verifycard();
+  gamesound("assets/cardsound.mp3");
+  if (chkTimeout != null) {
+    clearTimeout(chkTimeout);
+
+    verifycard();
   }
-  let card = event.target;
-  
+   let card = event.target;
 
   if (firstcard == null) {
     card.src = "assets/images/crd" + card.nAme + ".png";
     firstcard = card;
+  } else if (firstcard == card) {
+    firstcard.src = "assets/images/crdbck.png";
+    firstcard = null;
   } else if (secondcard == null) {
     card.src = "assets/images/crd" + card.nAme + ".png";
     secondcard = card;
@@ -64,6 +69,11 @@ function verifycard() {
   if (firstcard.nAme == secondcard.nAme) {
     cardGameContainer.removeChild(firstcard);
     cardGameContainer.removeChild(secondcard);
+    gamesound("assets/mtsound.wav");
+    matchedcards++;
+    if (matchedcards >= (gamerow * gamecol) / 2) {
+      winner();
+    }
   } else {
     firstcard.src = "assets/images/crdbck.png";
     secondcard.src = "assets/images/crdbck.png";
@@ -71,6 +81,14 @@ function verifycard() {
   firstcard = null;
   secondcard = null;
   chkTimeout = null;
+}
+function winner() {
+  document.getElementById("winner").style.visibility = "visible";
+}
+
+function gamesound(music) {
+  let sound = new Audio(music);
+  sound.play();
 }
 
 /*

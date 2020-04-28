@@ -1,21 +1,40 @@
-.container-fluid{
-    background-color: black;
+.container-fluid {
+  background-color: black;
 }
 
-.container{
-    background-color: #00a000;
+.container {
+  background-color: #00a000;
 }
 
-#cardContainer{
-    position: relative;
-    border: solid 3px rgb(255, 255, 255);
-    border-radius: 10px;
-    height: 700px;
-    width: 660px;
-    
+#cardContainer {
+  position: relative;
+  border: solid 3px rgb(255, 255, 255);
+  border-radius: 10px;
+  height: 700px;
+  width: 660px;
 }
-.cardImage{
-    position: absolute;
-    left: 10px;
-    top: 10px;
+.cardImage {
+  /* to stop the cards from being dragged */
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  -ms-user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+}
+#winner {
+  width: 660px;
+  height: 700px;
+  position: absolute;
+  top: 50%;
+  visibility: hidden;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+#show {
+  display: show;
 }
