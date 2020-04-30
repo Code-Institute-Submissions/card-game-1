@@ -1,17 +1,35 @@
-.container-fluid {
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans:100,200,300,400,500,600,700|Great+Vibes|Raleway|Dancing+Script&display=swap');
+
+#bodybg{
   background-color: black;
 }
 
-.container {
-  background-color: #00a000;
+
+#navbg{
+    background-color: wheat;
 }
+.navbar-brand{
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 500;
+
+}
+/*.container-fluid {
+  background-color: black;
+}*?
+
+/*.container {
+  background-color: #00a000;
+}**/
 
 #cardContainer {
+   display: none;
+  background-color: #bd2165;
   position: relative;
   border: solid 3px rgb(255, 255, 255);
   border-radius: 10px;
   height: 700px;
   width: 660px;
+  margin: 0 auto;
 }
 .cardImage {
   /* to stop the cards from being dragged */
@@ -37,4 +55,43 @@
 
 #show {
   display: show;
+}
+@media only screen and (max-width: 600px) {
+  #main-sec {
+    width: 100%;
+    position: absolute;
+    left: 0;
+  }
+}
+.navbar-toggler-icon{
+    font-family: 'Dancing Script', cursive;
+    font-size: 1em;
+    width: 2em;
+    justify-content: center!important;   
+}
+.navbar-light .navbar-toggler-icon{
+    background-image: none;
+}
+#signinForm{
+    position:absolute;
+    top: 40%;
+    left: 30%;
+    right: 30%
+}
+#userNameDisplay{
+    margin: 0 auto;
+    color: white;
+    margin-top: 10px;
+    padding: 10px;
+}
+ 
+ @media only screen and (max-width: 600px) {
+  #signinForm {
+    width: 100%;
+    position: absolute;
+    top: 100%;
+  }
+}
+.display{
+    display: show;
 }

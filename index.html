@@ -12,12 +12,17 @@
     />
 
     <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link
+      rel="shortcut icon"
+      type="image/ico"
+      href="assets/images/favicon.ico"
+    />
     <title>Document</title>
   </head>
-  <body>
-    <div class="d-flex justify-content-center">
+  <body id="bodybg">
+    <div id="navbg" class="d-flex justify-content-center">
       <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="#">Card Flip</a>
+        <a class="navbar-brand" href="index.html">Card Flip</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -46,30 +51,49 @@
           </ul>
         </div>
       </nav>
-    <!--main body-->  
+      <!--main body-->
     </div>
     <div class="container-fluid">
       <div class="container">
         <section id="main-sec">
-          <div id="cardContainer">
+          <div id="cardContainer"></div>
+          <div>
+             <form id="signinForm">
+               <input type="text" id="username" placeholder="name" autocomplete="off"/>  <br/>
+               <br>
+                <button type="submit" id="start-btn">Start</button>
+             </form>
+             <h3 id="userNameDisplay"></h3>
+           
+           
           </div>
           <div id="winner">
-            <div class="tenor-gif-embed" data-postid="13599964" data-share-method="host" data-width="100%" data-aspect-ratio="1.7647058823529411"><a href="https://tenor.com/view/fireworks-firework-fourth-of-july-chinese-invention-celebrate-gif-13599964">Fireworks Fourth Of July GIF</a> from <a href="https://tenor.com/search/fireworks-gifs">Fireworks GIFs</a></div><script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+            <div
+              class="tenor-gif-embed"
+              data-postid="13599964"
+              data-share-method="host"
+              data-width="100%"
+              data-aspect-ratio="1.7647058823529411"
+            >
+              <a
+                href="https://tenor.com/view/fireworks-firework-fourth-of-july-chinese-invention-celebrate-gif-13599964"
+                >Fireworks Fourth Of July GIF</a
+              >
+              from
+              <a href="https://tenor.com/search/fireworks-gifs"
+                >Fireworks GIFs</a
+              >
+            </div>
+            <script
+              type="text/javascript"
+              async
+              src="https://tenor.com/embed.js"
+            ></script>
           </div>
           <div>
             <p id="myp">Time <span id="time">00.00</span></p>
           </div>
-          <div>
-            <input
-              type="text"
-              id="name"
-              placeholder="name"
-              autocomplete="off"
-            />
-            <br />
-            <button id="start-btn" onclick="startTimer()">Start</button>
-          </div>
-        </section>
+         </section>
       </div>
     </div>
 
