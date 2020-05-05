@@ -1,14 +1,17 @@
-maingame();
+
 function maingame() {
   this.cardGameContainer = document.getElementById("cardContainer");
   this.cardSizeOne = 134;
   this.cardMargin = 30;
+  this.moblieSize = 100;
+  this.mobileMargin= 10;
   this.gamerow = 4;
   this.gamecol = 4;
   this.firstcard = null;
   this.secondcard = null;
   this.chkTimeout = null;
   this.matchedcards = 0;
+  this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   /*function getRandomArbitrary(min, max) {
   return Math.round(Math.random() * (max - min) + min);
  } // makeCard(getRandomArbitrary(1, 8), i, j);**/
@@ -41,6 +44,11 @@ function maingame() {
     card.style.position = "absolute";
     card.style.left = axy * (cardSizeOne + cardMargin) + cardMargin + "px";
     card.style.top = axx * (cardSizeOne + cardMargin) + cardMargin + "px";
+    if (isMobile) {
+        card.style.left = axy * (moblieSize + mobileMargin) + mobileMargin + "px";
+       card.style.top = axx * (moblieSize + mobileMargin) + mobileMargin + "px";
+  
+  }
     //card.classList.add("cardImage");
     card.onclick = clickedCard;
     cardGameContainer.appendChild(card);
@@ -74,6 +82,32 @@ function maingame() {
       matchedcards++;
       if (matchedcards >= (gamerow * gamecol) / 2) {
         winner();
+        stpTime();
+
+         
+        //Update winner time.
+        let playerId = sessionStorage.getItem('playerId');
+        let players = getGamePlayers();
+        let timeValue = document.getElementById("time").innerHTML;
+        if(players) {
+            players.forEach(player => {
+                if(player.id == playerId) {
+                    player.time = timeValue;
+                }
+            })
+
+            saveUpdatedGamePlayers(players);
+        }
+        const div = document.createElement('div');
+        div.setAttribute("id", "leadscorediv");
+
+      const leaderBoard = getLeaderBoard();
+      leaderBoard.forEach(player => {
+          div.innerHTML += `<div></div><span>${player.name}</span> -- <span>${player.time}</span></div>`
+      });
+
+      document.body.querySelector("#cardContainer").appendChild(div);
+    
       }
     } else {
       firstcard.src = "assets/images/crdbck.png";
@@ -84,7 +118,7 @@ function maingame() {
     chkTimeout = null;
   };
   this.winner = function() {
-    document.getElementById("winner").style.visibility = "visible";
+    document.getElementById("winner").style.display = "block";
   };
 
   this.gamesound = function(music) {
@@ -92,7 +126,122 @@ function maingame() {
     sound.play();
   };
   this.arrangeCrds(gamerow, gamecol);
+  
 };
+
+ 
+    
+let startGame= document.getElementById("cardContainer");
+let signUpform= document.getElementById("signinForm");
+let usernameInput= document.getElementById("username");
+let userdisplayname = document.getElementById("userNameDisplay")
+let counter = 0;
+let timelft = 0;
+let time = document.getElementById("time");
+function collectuserInput(){
+    signUpform.addEventListener("submit",function(e){
+       e.preventDefault();
+       signUpform.style.display= "none";
+        
+       startGame.style.display='block';
+        // Store new user info in storage.
+       let players = getGamePlayers();
+       const id = Date.now();
+       let newPlayer = {
+            id,
+            name: usernameInput.value,
+            time: "0:00",
+       };
+       players.push(newPlayer);
+       saveCurrentPlayerId(id);
+       saveUpdatedGamePlayers(players);
+
+      // alert(`Hello ${usernameInput.value} card flip is fun!`);
+      startTimer(usernameInput.value);
+        //leadboard
+      /**const div = document.createElement('div');
+
+      const leaderBoard = getLeaderBoard();
+      leaderBoard.forEach(player => {
+          div.innerHTML += `<div></div><span>${player.name}</span> -- <span>${player.time}</span></div>`
+      });
+
+      document.querySelector('body').append(div);**/
+     
+    });
+}
+
+function getLeaderBoard() {
+    let players = getGamePlayers();
+    let sortedPlayers = players.sort(function(a, b) {
+    let atime = a.time.replace(':', '.');
+    let btime = b.time.replace(':', '.');
+    return parseFloat(atime) - parseFloat(btime);
+    })
+    
+    return sortedPlayers;
+}
+
+function saveCurrentPlayerId(playerId) {
+    sessionStorage.setItem('playerId', playerId);
+}
+
+function saveUpdatedGamePlayers(players) {
+    sessionStorage.setItem('players', JSON.stringify(players));
+}
+
+function getGamePlayers() {
+ return sessionStorage.getItem('players') ? JSON.parse(sessionStorage.getItem('players')) : [];
+}
+
+
+  /*function displayusername(avatarname){
+     let userInput = userdisplayname.innerHTML= `Hello ${avatarname} click me to continue!`;
+  } */
+   
+  function startTimer(x){
+    let btn = userdisplayname;
+    btn.innerHTML= `Hello ${x} click me to continue!`;
+    btn.addEventListener("click",function(){
+    btn.innerHTML="";
+    maingame();
+    myinterval();
+    
+    });
+    
+}
+ function myinterval(){
+   let myintervaltime =  setInterval(timeSet, 1000);
+   return myintervaltime;
+ }
+ stpTime = function(){
+    let t = myinterval();
+     let c = clearInterval(t);
+    counter = ""
+   timelft = ""
+    time = ""
+   return c;
+    }
+    
+
+
+function convertsec(s) {
+  let min = Math.floor(s / 60);
+  let sec = s % 60;
+  return min + ":" + sec;
+}
+
+function timeSet() {
+  counter++;
+  time.innerHTML = convertsec(timelft + counter);
+}
+ /*function displayusername(avatarname){
+     userdisplayname.innerHTML=`Hello ${avatarname} card flip is fun`;
+     usernameInput.value = ""
+     usernameInput.focus();
+    
+ }*/
+ collectuserInput();
 
 /*
  makeCard(1,0,0);
@@ -106,27 +255,10 @@ function maingame() {
 
 //makeCard(1,0,3.8);
 
-/*function startTimer(){
-    let btn = document.getElementById("start-btn");
-    btn.addEventListener("click",setInterval(timeSet, 1000));
-}
-
-let counter = 0;
-let timelft = 0;
-let time = document.getElementById("time");
-function convertsec(s) {
-  let min = Math.floor(s / 60);
-  let sec = s % 60;
-  return min + ":" + sec;
-}
-
-function timeSet() {
-  counter++;
-  time.innerHTML = convertsec(timelft + counter);
-}
+ 
 //setInterval(timeSet, 1000);
 
-    let myinput= document.getElementById("name");
+   /* let myinput= document.getElementById("name");
     
     myinput.addEventListener("submit",function(e){
         e.preventDefault();
