@@ -11,10 +11,20 @@ function maingame() {
   this.secondcard = null;
   this.chkTimeout = null;
   this.matchedcards = 0;
+ this.sound = new Audio();
+ this.soundbtn= document.getElementById("soundtogglebtn");
   this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  /*function getRandomArbitrary(min, max) {
-  return Math.round(Math.random() * (max - min) + min);
- } // makeCard(getRandomArbitrary(1, 8), i, j);**/
+  
+   this.playpause= function (){
+      if(sound.muted){
+         sound.muted= false;
+     }else{
+         sound.muted = true;
+     }
+     
+}
+  
+ soundbtn.addEventListener("click",playpause); 
 
   this.arrangeCrds = function(vertical, horizontal) {
     let myarr = [];
@@ -39,7 +49,7 @@ function maingame() {
   this.makeCard = function(crdname, axx, axy) {
     let card = document.createElement("img");
     card.nAme = crdname;
-    card.src = "assets/images/crdbck.png"; //" + crdname + "
+    card.src = "assets/images/crdbck.png"; 
     card.classList.add("cardImage");
     card.style.position = "absolute";
     card.style.left = axy * (cardSizeOne + cardMargin) + cardMargin + "px";
@@ -49,7 +59,7 @@ function maingame() {
        card.style.top = axx * (moblieSize + mobileMargin) + mobileMargin + "px";
   
   }
-    //card.classList.add("cardImage");
+
     card.onclick = clickedCard;
     cardGameContainer.appendChild(card);
   };
@@ -100,7 +110,7 @@ function maingame() {
         }
         const div = document.createElement('div');
         div.setAttribute("id", "leadscorediv");
-
+       //leadboard
       const leaderBoard = getLeaderBoard();
       leaderBoard.forEach(player => {
           div.innerHTML += `<div></div><span>${player.name}</span> -- <span>${player.time}</span></div>`
@@ -120,9 +130,10 @@ function maingame() {
   this.winner = function() {
     document.getElementById("winner").style.display = "block";
   };
-
+ 
+  
   this.gamesound = function(music) {
-    let sound = new Audio(music);
+    sound.src= music;
     sound.play();
   };
   this.arrangeCrds(gamerow, gamecol);
@@ -138,6 +149,7 @@ let userdisplayname = document.getElementById("userNameDisplay")
 let counter = 0;
 let timelft = 0;
 let time = document.getElementById("time");
+let soundoffon= document.getElementById("soundtoggle");    
 function collectuserInput(){
     signUpform.addEventListener("submit",function(e){
        e.preventDefault();
@@ -155,9 +167,7 @@ function collectuserInput(){
        players.push(newPlayer);
        saveCurrentPlayerId(id);
        saveUpdatedGamePlayers(players);
-
-      // alert(`Hello ${usernameInput.value} card flip is fun!`);
-      startTimer(usernameInput.value);
+       startTimer(usernameInput.value);
         //leadboard
       /**const div = document.createElement('div');
 
@@ -169,9 +179,9 @@ function collectuserInput(){
       document.querySelector('body').append(div);**/
      
     });
-}
+ }
 
-function getLeaderBoard() {
+  function getLeaderBoard() {
     let players = getGamePlayers();
     let sortedPlayers = players.sort(function(a, b) {
     let atime = a.time.replace(':', '.');
@@ -180,30 +190,27 @@ function getLeaderBoard() {
     })
     
     return sortedPlayers;
-}
+ }
 
-function saveCurrentPlayerId(playerId) {
-    sessionStorage.setItem('playerId', playerId);
-}
+  function saveCurrentPlayerId(playerId) {
+     sessionStorage.setItem('playerId', playerId);
+  }
 
-function saveUpdatedGamePlayers(players) {
-    sessionStorage.setItem('players', JSON.stringify(players));
-}
+  function saveUpdatedGamePlayers(players) {
+     sessionStorage.setItem('players', JSON.stringify(players));
+  }
 
-function getGamePlayers() {
- return sessionStorage.getItem('players') ? JSON.parse(sessionStorage.getItem('players')) : [];
-}
-
-
-  /*function displayusername(avatarname){
-     let userInput = userdisplayname.innerHTML= `Hello ${avatarname} click me to continue!`;
-  } */
+ function getGamePlayers() {
+   return sessionStorage.getItem('players') ? JSON.parse(sessionStorage.getItem('players')) : [];
+ }
+ 
    
   function startTimer(x){
     let btn = userdisplayname;
     btn.innerHTML= `Hello ${x} click me to continue!`;
     btn.addEventListener("click",function(){
     btn.innerHTML="";
+    soundoffon.style.display="block";
     maingame();
     myinterval();
     
@@ -235,32 +242,7 @@ function timeSet() {
   counter++;
   time.innerHTML = convertsec(timelft + counter);
 }
- /*function displayusername(avatarname){
-     userdisplayname.innerHTML=`Hello ${avatarname} card flip is fun`;
-     usernameInput.value = ""
-     usernameInput.focus();
-    
- }*/
+ 
  collectuserInput();
 
-/*
- makeCard(1,0,0);
- makeCard(5,0,1);
- makeCard(7,0,2);
- makeCard(9,0,3);
-  makeCard(8,1,0);
- makeCard(4,1,1);
- makeCard(3,1,2);
- makeCard(6,1,3);**/
-
-//makeCard(1,0,3.8);
-
- 
-//setInterval(timeSet, 1000);
-
-   /* let myinput= document.getElementById("name");
-    
-    myinput.addEventListener("submit",function(e){
-        e.preventDefault();
-        console.log(myinput.value);
-    }); **/
+  
