@@ -55,6 +55,8 @@
   -webkit-user-drag: none;
   -khtml-user-drag: none;
   -moz-user-drag: none;
+  /*width: 66.662px !important;
+  height: 100px !important;**/
 }
 #winner {
   width: 100%;

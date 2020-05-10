@@ -3,23 +3,29 @@ function maingame() {
   this.cardGameContainer = document.getElementById("cardContainer");
   this.cardSizeOne = 134;
   this.cardMargin = 30;
-  this.moblieSize = 100;
-  this.mobileMargin= 10;
-  this.gamerow = 4;
-  this.gamecol = 4;
+  this.moblieSize = 80;
+  this.mobileMargin= 8;
+  this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  this.gamerow =this.isMobile? 4:4;
+  this.gamecol = this.isMobile? 4:4;
   this.firstcard = null;
   this.secondcard = null;
   this.chkTimeout = null;
   this.matchedcards = 0;
- this.sound = new Audio();
- this.soundbtn= document.getElementById("soundtogglebtn");
-  this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  this.sound = new Audio();
+  this.soundbtn= document.getElementById("soundtogglebtn");
   
+  let muteon = document.createElement("img");
+    muteon.src = "assets/images/muteon.png"; 
+    let muteoff = document.createElement("img");
+    muteon.src = "assets/images/muteoff.png"; 
    this.playpause= function (){
       if(sound.muted){
          sound.muted= false;
+         soundbtn.innerHTML="sound-on";
      }else{
          sound.muted = true;
+         soundbtn.innerHTML="sound-off";
      }
      
 }
@@ -50,14 +56,16 @@ function maingame() {
     let card = document.createElement("img");
     card.nAme = crdname;
     card.src = "assets/images/crdbck.png"; 
-    card.classList.add("cardImage");
+    card.classList.add("cardImage");//, "col-xs-4", "col-sm-3"
     card.style.position = "absolute";
-    card.style.left = axy * (cardSizeOne + cardMargin) + cardMargin + "px";
-    card.style.top = axx * (cardSizeOne + cardMargin) + cardMargin + "px";
+    
     if (isMobile) {
         card.style.left = axy * (moblieSize + mobileMargin) + mobileMargin + "px";
-       card.style.top = axx * (moblieSize + mobileMargin) + mobileMargin + "px";
+       card.style.top = axx * (moblieSize + cardMargin) + (mobileMargin*4) + "px";
   
+  }else{
+      card.style.left = axy * (cardSizeOne + cardMargin) + cardMargin + "px";
+    card.style.top = axx * (cardSizeOne + cardMargin) + cardMargin + "px";
   }
 
     card.onclick = clickedCard;
@@ -167,16 +175,7 @@ function collectuserInput(){
        players.push(newPlayer);
        saveCurrentPlayerId(id);
        saveUpdatedGamePlayers(players);
-       startTimer(usernameInput.value);
-        //leadboard
-      /**const div = document.createElement('div');
-
-      const leaderBoard = getLeaderBoard();
-      leaderBoard.forEach(player => {
-          div.innerHTML += `<div></div><span>${player.name}</span> -- <span>${player.time}</span></div>`
-      });
-
-      document.querySelector('body').append(div);**/
+       startTimer(usernameInput.value); 
      
     });
  }
