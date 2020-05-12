@@ -1,39 +1,38 @@
-<img src="https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png" style="margin: 0;">
+#Card-Game
 
-Welcome Fatima Aminu,
+Card flip is fun pairing game, that revolves around pairs of different types of card faces to be matched  
+by clicking the cards to revel the faces behind.   
+I used the faces of my favorite artists, enjoy!
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. You can safely delete this README.md file, or change it for your own project.
+##UX
 
-## Gitpod Reminders
+This game is for everyone, it is that game that you will play when you find yourself at some waiting room,bank que   
+or anyother place that you may need to wind off time: it is fun,simple and straight to the point.
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+##Features
 
-`python3 -m http.server`
+-Request players to enter a user name in order to straight
+-It displays the user name with a welcome note on screen
+-Timer starts at the start of the game 
+- two differnt kinds of Sound when a player clicks and when a match is made
+-Sound toggle option available 
+-At the end of the game a celebratory gif comes on 
+-Timer stops
+-Leader board displays time spent playing the game, displaying the player with the best time record on top 
 
-A blue button should appear to click: *Make Public*,
+**Future Implementation** I will like to improve the game to remember each player and keep their progress and also provide a two player option.
 
-Another blue button should appear to click: *Open Browser*.
+##Technologies used 
+-It was used for the interactivity of the game*[JavaScript](https://www.ecma-international.org/)*.
+-It was used for some of the game layout and alignment*[CSS](https://www.w3.org/Style/CSS/Overview.en.html)*.
+-It was used to put the page structure in place*[HTML](https://validator.w3.org/)*.
+-It was used for some of the page layout*[Bootstrap](https://getbootstrap.com/)*.
+-It was used for interactivity*[Jquery](https://www.markdownguide.org)*.
+-It was used for page fonts*[Google fonts](https://fonts.google.com/)*.
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+##Testing
 
-A blue button should appear to click: *Make Public*,
+1.Jamsmine test framework was used:   
+kindly refer to test-folder attached for test results.
+2.
 
-Another blue button should appear to click: *Open Browser*.
-
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the backend lessons.
-
-## Updates Since The Instructional Video
-
-We continually tweak and adjust this template to help give you the best experience. Here are the updates since the original video was made:
-
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
-
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
-
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
-
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
-
---------
-
-Happy coding!
