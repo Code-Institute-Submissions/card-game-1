@@ -46,6 +46,7 @@ kindly refer to test-folder attached for test results.
 6. Tested on internet explorer, Brave web browser,mozilla firefox
 7. CSS validated*[CSS](https://jigsaw.w3.org/css-validator/)*.
 8. HTML validated *[HTML](https://validator.w3.org/)*.
+9. JavaScript validated *[JavaScript](https://esprima.org/demo/validate.html)*.
 
 ## Deployment
 

@@ -69,7 +69,7 @@
 }
 
 #show {
-  display: show;
+  display: block;
 }
 @media only screen and (max-width: 600px) {
   #main-sec {
@@ -139,7 +139,7 @@
 }
 
 .display{
-    display: show;
+    display: block;
 }
 #myp{
     color: whitesmoke;
