@@ -8,6 +8,8 @@ I used the faces of my favorite artists, enjoy!
 
 This game is for everyone, it is that game that you will play when you find yourself at some waiting room,bank que   
 or anyother place that you may need to wind off time: it is fun,simple and straight to the point.
+*[wireframe](card-game/wireframe/card-flip-wireframe.pdf)*.
+
 
 ## Features
 
