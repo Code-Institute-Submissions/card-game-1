@@ -23,6 +23,7 @@ class Game {
   configureGameSound() {
     this.soundbtn.addEventListener("click", () => {
       this.sound.muted = !this.sound.muted;
+      soundbtn.innerHTML = "sound-on";
     });
   }
 
@@ -57,25 +58,22 @@ class Game {
     card.src = "assets/images/crdbck.png";
     card.classList.add("cardImage");
     card.style.position = "absolute";
-    card.style.left =
-      axy * (this.cardSizeOne + this.cardMargin) + this.cardMargin + "px";
-    card.style.top =
-      axx * (this.cardSizeOne + this.cardMargin) + this.cardMargin + "px";
+    card.style.left = axy * (this.cardSizeOne + this.cardMargin) + this.cardMargin + "px";
+    card.style.top = axx * (this.cardSizeOne + this.cardMargin) + this.cardMargin + "px";
     if (this.isMobileBrowser()) {
-      card.style.left =
-        axy * (this.moblieSize + this.mobileMargin) + this.mobileMargin + "px";
-      card.style.top =
-        axx * (this.moblieSize + this.mobileMargin) + this.mobileMargin + "px";
+      card.style.left = axy * (this.moblieSize + this.mobileMargin) + this.mobileMargin + "px";
+      card.style.top = axx * (this.moblieSize + this.mobileMargin) + this.mobileMargin + "px";
+
     }
 
-    card.addEventListener("click", (e) => this.clickedCard(e));
+    card.addEventListener('click', e => this.clickedCard(e));
     this.cardGameContainer.appendChild(card);
-  }
+  };
 
   playGameSound(music) {
-    // this.sound.src = music;
-    // this.sound.play();
-  }
+     this.sound.src = music;
+     this.sound.play();
+  };
 
   clickedCard(event) {
     this.playGameSound("assets/cardsound.mp3");
@@ -101,7 +99,7 @@ class Game {
 
   winner = function () {
     document.getElementById("winner").style.display = "block";
-   };
+  };
 
   verifycard() {
     if (this.firstcard.nAme === this.secondcard.nAme) {
@@ -109,34 +107,39 @@ class Game {
       this.cardGameContainer.removeChild(this.secondcard);
       this.playGameSound("assets/mtsound.wav");
       this.matchedcards++;
-      if (this.matchedcards >= (this.gamerow * this.gamecol) / 2) {
-        this.winner();
-        this.stpTime();
-       
-        
-
+       if (this.matchedcards >= (this.gamerow * this.gamecol) / 2) {
         //Update winner time.
-        let playerId = sessionStorage.getItem("playerId");
+        let playerId = sessionStorage.getItem('playerId');
         let players = this.getGamePlayers();
         let timeValue = document.getElementById("time").innerHTML;
+
+        console.log('time value', timeValue);
+
+        console.log('player id', playerId);
+        console.log('players', players);
         if (players) {
-          players.forEach((player) => {
-            if (player.id === playerId) {
+          players.forEach(player => {
+            if (parseInt(player.id) === parseInt(playerId)) {
               player.time = timeValue;
             }
           });
 
           this.saveUpdatedGamePlayers(players);
         }
-        const div = document.createElement("div");
+
+        console.log('players to updatte....', players);
+        const div = document.createElement('div');
         div.setAttribute("id", "leadscorediv");
         // leader-board
         const leaderBoard = this.getLeaderBoard();
-        leaderBoard.forEach((player) => {
-          div.innerHTML += `<div></div><span>${player.name}</span> -- <span>${player.time}</span></div>`;
+        leaderBoard.forEach(player => {
+          div.innerHTML += `<div></div><span>${player.name}</span> -- <span>${player.time}</span></div>`
         });
 
         document.body.querySelector("#cardContainer").appendChild(div);
+
+        this.winner();
+        this.stpTime();
       }
     } else {
       this.firstcard.src = "assets/images/crdbck.png";
@@ -145,13 +148,13 @@ class Game {
     this.firstcard = null;
     this.secondcard = null;
     this.chkTimeout = null;
-  }
+  };
 
   getLeaderBoard() {
-    let players = getGamePlayers();
+    let players = this.getGamePlayers();
     return players.sort(function (a, b) {
-      let atime = a.time.replace(":", ".");
-      let btime = b.time.replace(":", ".");
+      let atime = a.time.replace(':', '.');
+      let btime = b.time.replace(':', '.');
       return parseFloat(atime) - parseFloat(btime);
     });
   }
@@ -160,7 +163,7 @@ class Game {
     let usernameInput = document.getElementById("username");
     signUpform.style.display = "none";
 
-    this.cardGameContainer.style.display = "block";
+    this.cardGameContainer.style.display = 'block';
     // Store new user info in storage.
     let players = this.getGamePlayers();
     const id = Date.now();
@@ -176,35 +179,32 @@ class Game {
   }
 
   getGamePlayers() {
-    return sessionStorage.getItem("players")
-      ? JSON.parse(sessionStorage.getItem("players"))
-      : [];
+    return sessionStorage.getItem('players') ? JSON.parse(sessionStorage.getItem('players')) : [];
   }
 
   saveCurrentPlayerId(playerId) {
-    sessionStorage.setItem("playerId", playerId);
+    sessionStorage.setItem('playerId', playerId);
   }
 
   // Game Initialization -> Gets user name from sign up screen
   initGame() {
     const signUpform = document.getElementById("signinForm");
-    signUpform.addEventListener("submit", (e) => {
+    signUpform.addEventListener("submit", (e) =>  {
       e.preventDefault();
-      this.collectuserInput(signUpform);
-    });
+      this.collectuserInput(signUpform)
+    })
   }
 
   saveUpdatedGamePlayers(players) {
-    sessionStorage.setItem("players", JSON.stringify(players));
+    sessionStorage.setItem('players', JSON.stringify(players));
   }
 
   startGame() {
     let btn = document.getElementById("userNameDisplay");
-    let soundoffon = document.getElementById("soundtoggle");
+    let soundbtndisplay = document.getElementById("soundtogglebtn");
     btn.innerHTML = "";
     btn.parentNode.removeChild(btn);
-    soundoffon.style.display = "block";
-    setInterval(this.timeSet(), 1000);
+    soundbtndisplay.style.display = "inline-block";
     this.arrangeCrds();
     this.myinterval();
   }
@@ -212,12 +212,12 @@ class Game {
   startTimer(x) {
     let btn = document.getElementById("userNameDisplay");
     btn.innerHTML = `Hello ${x} click me to continue!`;
-    btn.addEventListener("click", () => this.startGame());
+    btn.addEventListener("click",  () => this.startGame());
   }
 
- /* myinterval() {
+  myinterval() {
     return setInterval(() => this.timeSet(), 1000);
-  }**/
+  }
 
   convertsec(s) {
     let min = Math.floor(s / 60);
@@ -232,17 +232,13 @@ class Game {
   }
 
   stpTime() {
-    let myt= document.getElementById("time");
-    let t = this.myinterval;
+    let t = this.myinterval();
     let c = clearInterval(t);
-    this.counter = "";
-    this.timelft = "";
-    myt.innerHTML="00.00";
-    
-    //myt.parentNode.removeChild(myt);
+    this.counter = ""
+    this.timelft = ""
     return c;
   }
- }
+}
 
 const game = new Game(4, 4);
 game.initGame();
