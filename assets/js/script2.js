@@ -5,8 +5,9 @@ class Game {
     this.cardMargin = 30;
     this.moblieSize = 80;
     this.mobileMargin = 8;
-    this.gamerow = row;
-    this.gamecol = col;
+    this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    this.gamerow = this.isMobile ? 6 : 4;
+    this.gamecol = this.isMobile ? 3 : 4;
     this.firstcard = null;
     this.secondcard = null;
     this.chkTimeout = null;
@@ -15,6 +16,8 @@ class Game {
     this.timelft = 0;
     this.sound = new Audio();
     this.soundbtn = document.getElementById("soundtogglebtn");
+    this.times= document.getElementById("time");
+    
 
     //Game Config
     this.configureGameSound();
@@ -22,8 +25,8 @@ class Game {
 
   configureGameSound() {
     this.soundbtn.addEventListener("click", () => {
-      this.sound.muted = !this.sound.muted;
-      soundbtn.innerHTML = "sound-on";
+    this.sound.muted = !this.sound.muted;
+    this.soundbtn.innerHTML = this.sound.muted ? "sound-off" : "sound-on";
     });
   }
 
@@ -58,12 +61,14 @@ class Game {
     card.src = "assets/images/crdbck.png";
     card.classList.add("cardImage");
     card.style.position = "absolute";
-    card.style.left = axy * (this.cardSizeOne + this.cardMargin) + this.cardMargin + "px";
-    card.style.top = axx * (this.cardSizeOne + this.cardMargin) + this.cardMargin + "px";
+    //card.style.left = axy * (this.cardSizeOne + this.cardMargin) + this.cardMargin + "px";
+    //card.style.top = axx * (this.cardSizeOne + this.cardMargin) + this.cardMargin + "px";
     if (this.isMobileBrowser()) {
       card.style.left = axy * (this.moblieSize + this.mobileMargin) + this.mobileMargin + "px";
-      card.style.top = axx * (this.moblieSize + this.mobileMargin) + this.mobileMargin + "px";
-
+      card.style.top = axx * (this.moblieSize + this.cardMargin) + this.mobileMargin * 4 + "px";
+    } else {
+      card.style.left = axy * (this.cardSizeOne + this.cardMargin) + this.cardMargin + "px";
+      card.style.top = axx * (this.cardSizeOne + this.cardMargin) + this.cardMargin + "px";
     }
 
     card.addEventListener('click', e => this.clickedCard(e));
@@ -97,7 +102,7 @@ class Game {
     }
   }
 
-  winner = function () {
+  winner() {
     document.getElementById("winner").style.display = "block";
   };
 
@@ -113,10 +118,7 @@ class Game {
         let players = this.getGamePlayers();
         let timeValue = document.getElementById("time").innerHTML;
 
-        console.log('time value', timeValue);
-
-        console.log('player id', playerId);
-        console.log('players', players);
+       
         if (players) {
           players.forEach(player => {
             if (parseInt(player.id) === parseInt(playerId)) {
@@ -127,7 +129,7 @@ class Game {
           this.saveUpdatedGamePlayers(players);
         }
 
-        console.log('players to updatte....', players);
+        
         const div = document.createElement('div');
         div.setAttribute("id", "leadscorediv");
         // leader-board
@@ -217,6 +219,7 @@ class Game {
 
   myinterval() {
     return setInterval(() => this.timeSet(), 1000);
+    //return setInterval(()=>this.timeSet, 1000);
   }
 
   convertsec(s) {
@@ -226,9 +229,10 @@ class Game {
   }
 
   timeSet() {
-    const time = document.getElementById("time");
+    
     this.counter++;
-    time.innerHTML = this.convertsec(this.timelft + this.counter);
+    this.times.innerHTML = this.convertsec(this.timelft + this.counter);
+    //this.times.innerHTML = "" ? times.parentNode.removeChild(times) :  this.times.innerHTML = this.convertsec(this.timelft + this.counter);
   }
 
   stpTime() {
@@ -236,6 +240,8 @@ class Game {
     let c = clearInterval(t);
     this.counter = ""
     this.timelft = ""
+    this.times=""
+    
     return c;
   }
 }
