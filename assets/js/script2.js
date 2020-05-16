@@ -16,8 +16,8 @@ class Game {
     this.timelft = 0;
     this.sound = new Audio();
     this.soundbtn = document.getElementById("soundtogglebtn");
-    this.times= document.getElementById("time");
-    
+    this.times = document.getElementById("time");
+    this.timer = null;
 
     //Game Config
     this.configureGameSound();
@@ -40,7 +40,6 @@ class Game {
       myarr.push(a);
       myarr.push(a);
     }
-
     let cardShuffle = [];
     while (myarr.length > 0) {
       let cardRandom = Math.floor(Math.random() * myarr.length);
@@ -56,8 +55,9 @@ class Game {
   }
 
   makeCard(crdname, axx, axy) {
+    console.log('cardName', typeof crdname, crdname);
     let card = document.createElement("img");
-    card.nAme = crdname;
+    card.nAme = crdname > 8 ? crdname - 8 :  crdname;
     card.src = "assets/images/crdbck.png";
     card.classList.add("cardImage");
     card.style.position = "absolute";
@@ -77,7 +77,11 @@ class Game {
 
   playGameSound(music) {
      this.sound.src = music;
+     const isPlaying = this.sound.currentTime > 0 && !this.sound.paused && !this.sound.ended 
+    && this.sound.readyState > 2;
+    if(!isPlaying) {
      this.sound.play();
+    }
   };
 
   clickedCard(event) {
@@ -218,8 +222,8 @@ class Game {
   }
 
   myinterval() {
-    return setInterval(() => this.timeSet(), 1000);
-    //return setInterval(()=>this.timeSet, 1000);
+    // Set time interval to class variable.
+    this.timer = setInterval(() => this.timeSet(), 1000);
   }
 
   convertsec(s) {
@@ -229,20 +233,16 @@ class Game {
   }
 
   timeSet() {
-    
     this.counter++;
     this.times.innerHTML = this.convertsec(this.timelft + this.counter);
-    //this.times.innerHTML = "" ? times.parentNode.removeChild(times) :  this.times.innerHTML = this.convertsec(this.timelft + this.counter);
   }
 
   stpTime() {
-    let t = this.myinterval();
-    let c = clearInterval(t);
+    // Clear instance of created timer..
+    clearInterval(this.timer);
     this.counter = ""
     this.timelft = ""
-    this.times=""
-    
-    return c;
+    this.times.innerHTML = ""
   }
 }
 
