@@ -38,12 +38,12 @@ or any other place that you may find yourself killing time: it is fun, simple an
 
 1. Jamsmine test framework was used:   
 kindly refer to test-folder attached and start the test.html to see test results.
-2. It is assumed that given the simplicty of the game: user will start and finsh on  the same viewport 
+2. It is assumed that given the simplicty of the game: user will start and finish on  the same viewport 
 - by design cards display 4 by 4 on bigger screens
 - on smaller screens it displays 3 by 6
 3. Input feild onlanding page: 
-- it gives you the flexibility to  type in a username, press start or enter to start the game
-4. Tested on google development tool
+- user has to enter a name to start the game
+4. Tested on google development tool : full screen and mobile
 5. Tested on mobile
 6. Tested on internet explorer, Brave web browser,mozilla firefox
 7. CSS validated*[CSS](https://jigsaw.w3.org/css-validator/)*.
@@ -70,6 +70,9 @@ kindly refer to test-folder attached and start the test.html to see test results
 *[google](https://www.google.com/)*.
 
 ## AcknowledgementsAcknowledgements
+
+I got the inspiration for this project from the card game i use to play as a kid.
+
 
 
 
