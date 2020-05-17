@@ -5,9 +5,11 @@ class Game {
     this.cardMargin = 30;
     this.moblieSize = 80;
     this.mobileMargin = 8;
+    this.userAgent = navigator.userAgent.toLowerCase();
+    this.isTablet = /(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/.test(this.userAgent);
     this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent); //stackoverflow
-    this.gamerow = this.isMobile ? 6 : 4;
-    this.gamecol = this.isMobile ? 3 : 4;
+    this.gamerow = this.isMobile && !this.isTablet ? 6 : 4;
+    this.gamecol = this.isMobile && !this.isTablet ? 3 : 4;
     this.firstcard = null;
     this.secondcard = null;
     this.chkTimeout = null;
@@ -18,6 +20,9 @@ class Game {
     this.soundbtn = document.getElementById("soundtogglebtn");
     this.times = document.getElementById("time");
     this.timer = null;
+
+    
+    
 
     //Game Config
     this.configureGameSound();
@@ -30,8 +35,8 @@ class Game {
     });
   }
 
-  isMobileBrowser() { //stackoverflow
-    return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  isMobileBrowser(browserAgent) { //stackoverflow
+    return /iPhone|iPad|iPod|Android/i.test(browserAgent);
   }
 
   arrangeCrds() {
@@ -61,10 +66,17 @@ class Game {
     card.src = "assets/images/crdbck.png";
     card.classList.add("cardImage");
     card.style.position = "absolute";
-    if (this.isMobileBrowser()) {
+    if(this.isTablet){
+       card.style.left = axy * (this.cardSizeOne + this.cardMargin) + this.cardMargin + "px";
+       card.style.top = axx * (this.cardSizeOne + this.cardMargin) + this.cardMargin + "px";
+    
+    }
+    else if (this.isMobileBrowser(navigator.userAgent)) {
       card.style.left = axy * (this.moblieSize + this.mobileMargin) + this.mobileMargin + "px";
       card.style.top = axx * (this.moblieSize + this.cardMargin) + this.mobileMargin * 4 + "px";
-    } else {
+    }
+    
+     else {
       card.style.left = axy * (this.cardSizeOne + this.cardMargin) + this.cardMargin + "px";
       card.style.top = axx * (this.cardSizeOne + this.cardMargin) + this.cardMargin + "px";
     }

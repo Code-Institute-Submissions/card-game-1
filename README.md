@@ -40,7 +40,7 @@ or any other place that you may find yourself killing time: it is fun, simple an
 kindly refer to test-folder attached and start the test.html to see test results.
 2. It is assumed that given the simplicty of the game: user will start and finish on  the same viewport 
 - by design cards display 4 by 4 on bigger screens
-- on smaller screens it displays 3 by 6
+- on smaller screens it displays 3 by 6, the scope of the game is designed for pc and mobile. 
 3. Input feild onlanding page: 
 - user has to enter a name to start the game
 4. Tested on google development tool : full screen and mobile
