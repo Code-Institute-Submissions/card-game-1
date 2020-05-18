@@ -1,30 +1,23 @@
-@import url('https://fonts.googleapis.com/css?family=Josefin+Sans:100,200,300,400,500,600,700|Great+Vibes|Raleway|Dancing+Script&display=swap');
+ @import url('https://fonts.googleapis.com/css?family=Josefin+Sans:100,200,300,400,500,600,700|Great+Vibes|Raleway|Dancing+Script&display=swap');
 
-#bodybg{
+ #bodybg{
   background-color: black;
   color: white;
   font-family: 'Raleway', sans-serif;
-}
+ }
 
 
-#navbg{
+ #navbg{
     background-color: wheat;
-}
-.navbar-brand{
+ }
+ .navbar-brand{
   font-family: 'Josefin Sans', sans-serif;
   font-weight: 500;
 
-}
-/*.container-fluid {
-  background-color: black;
-}*?
+ }
 
-/*.container {
-  background-color: #00a000;
-}**/
-
-#cardContainer {
-   display: none;
+ #cardContainer {
+  display: none;
   background-color: #bd2165;
   position: relative;
   border: solid 3px rgb(255, 255, 255);
@@ -32,9 +25,9 @@
   height: 700px;
   width: 660px;
   margin: 0 auto;
-}
-.game-rules{
- background-color: #bd2165;
+ }
+ .game-rules{
+  background-color: #bd2165;
   position: relative;
   border: solid 3px rgb(255, 255, 255);
   border-radius: 10px;
@@ -44,56 +37,54 @@
   padding: 15px;
   letter-spacing: 1px;
   margin-top: 5%;
-}
+ }
 .cardImage {
   /* to stop the cards from being dragged */
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
-  user-select: none;
+   user-select: none;
   -ms-user-select: none;
   -webkit-user-drag: none;
   -khtml-user-drag: none;
   -moz-user-drag: none;
-  /*width: 66.662px !important;
-  height: 100px !important;**/
-}
-#winner {
+  
+ }
+ #winner {
   width: 100%;
   height: 100%;
   position: absolute;
   display: none;
- /* display: table-cell;**/
-  vertical-align: middle;
+   vertical-align: middle;
   text-align: center;
-}
+ }
 
-#show {
+ #show {
   display: block;
-}
-@media only screen and (max-width: 600px) {
+ }
+ @media only screen and (max-width: 600px) {
   #main-sec {
     width: 100%;
     position: absolute;
     left: 0;
   }
-}
-.navbar-toggler-icon{
+ }
+ .navbar-toggler-icon{
     font-family: 'Dancing Script', cursive;
     font-size: 1em;
     width: 2em;
     justify-content: center!important;   
-}
-.navbar-light .navbar-toggler-icon{
+ }
+ .navbar-light .navbar-toggler-icon{
     background-image: none;
-}
-#signinForm{
+ }
+ #signinForm{
     position:absolute;
     top: 40%;
     left: 30%;
     right: 30%
-}
-#userNameDisplay{
+ }
+ #userNameDisplay{
    color: white;
     padding: 10px;
     position: absolute;
@@ -101,7 +92,7 @@
     top: 30%;
     left: 10%;
     right: 10%;
-}
+ }
 
  
  @media only screen and (max-width: 600px) {
@@ -110,61 +101,54 @@
     position: absolute;
     
   }
-}
- /*@media only screen and (max-width: 600px) {
-  #userNameDisplay {
-    left: 1%;
-    right: 1%;
-  }
-}**/
+ }
+ 
 
-@media only screen and (max-width: 600px) {
+ @media only screen and (max-width: 600px) {
   img {
     width: 66.662px !important;
     height: 100px !important;
 
   }
-}
+ }
 
-@media only screen and (max-width: 600px) {
+ @media only screen and (max-width: 600px) {
    #cardContainer {
     width: 100%;
-}
-}
+ }
+ }
 
-@media only screen and (max-width: 600px) {
+ @media only screen and (max-width: 600px) {
    .game-rules {
     width: 100%;
-}
-}
+ }
+ }
 
-.display{
+ .display{
     display: block;
-}
-#myp{
+ }
+ #myp{
     color: whitesmoke;
     font-family: sans-serif;
-}
-.relative-div{
+ }
+ .relative-div{
     position: relative;
-}
-#leadscorediv{
+ }
+ #leadscorediv{
     position: absolute;
     top: 55%;
     left: 41%;
  }
  #soundtogglebtn{
-     display: none;
-     outline: none;
-     /*position: absolute;
-     right: 2%;
-    bottom: 1%;**/
-}
-.btn-color{
+    display: none;
+    outline: none;
+    
+ }
+ .btn-color{
    background-color: #343a40;
    color : #8e959b;
    border: solid 1px #8e959b;
    border-radius: 4px;
 
-}
+ }
  

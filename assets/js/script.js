@@ -6,7 +6,7 @@ class Game {
     this.moblieSize = 80;
     this.mobileMargin = 8;
     this.userAgent = navigator.userAgent.toLowerCase();
-    this.isTablet = /(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/.test(this.userAgent);
+    this.isTablet = /(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/.test(this.userAgent); //stackoverflow
     this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent); //stackoverflow
     this.gamerow = this.isMobile && !this.isTablet ? 6 : 4;
     this.gamecol = this.isMobile && !this.isTablet ? 3 : 4;
@@ -16,7 +16,7 @@ class Game {
     this.matchedcards = 0;
     this.counter = 0;
     this.timelft = 0;
-    this.sound = new Audio();
+    this.sound = new Audio(); //w3
     this.soundbtn = document.getElementById("soundtogglebtn");
     this.times = document.getElementById("time");
     this.timer = null;
